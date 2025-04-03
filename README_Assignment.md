@@ -186,7 +186,7 @@ On paper, design a top-level component that hooks up 2 DDS controllers to your I
 Translate your design to VHDL--wrap your DDS tone generators and I2S transmitter in a top-level file, `top_level.vhd`. Include the I2S receiver ports as well, so your entity declaration looks like the following:
 
 <p align="center">
-<img src="figures/lab1-top-entity.png" style="width:50%; height:auto;">
+<img src="figures/lab1-top-entity.png" style="width:40%; height:auto;">
 </p>
 
 At this stage, you can leave the serial audio data input port, `ac_adc_data_i`, open. We will implement this in Task 4.
