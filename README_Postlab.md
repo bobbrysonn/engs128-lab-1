@@ -2,9 +2,25 @@
 
 ## Postlab Report and Assignment Submission
 
+### Canvas Submission
+
 For the Canvas assignment submission, you will upload:
 * Your GitHub repository link
 * A PDF of your post-lab report
+
+You and your partner are expected to work together on this assignment--each lab group will submit one GitHub link and post-lab report.
+
+---
+
+### Evaluation
+Your work will be evaluated against a rubric with the following breakdown:
+* 30% of your grade for the quality of your paper design (architecture, parameter, and timing analysis).
+* 30% of your grade for the quality of your testbench simulation (code and annotated results).
+* 15% of your grade for the quality of your code.
+* 10% of your grade for the quality of your implementation results and design demonstration.
+* 15% of your grade for the quality of your post-lab documentation and analysis (your explanatory work).
+
+See Canvas for the detailed rubric.
 
 ---
 
@@ -27,6 +43,17 @@ git push
 
 ## Post Lab Report
 
+The majority of the post-lab report will consist of consolidating, organizing, and explaining the design documentation deliverables in each task outlined in `README_Assignment.md`--all paper designs, RTL schematics, block diagrams, and annotated waveform diagrams should all be included as figures in the report. 
+
+>[!Important]
+>Every image/figure in the report should have a short (1-2 sentences) description of what the reader should deduce from looking at it.
+>
+>All block diagrams and simulation waveforms should be sufficiently annotated to make it easy to see the intended design and behavior.
+>
+>**YOU WILL NOT RECEIVE CREDIT FOR UNCOMMENTED FIGURES.**
+
+---
+
 ### Report Outline
 Your lab report should include:
 1. A brief **introduction** (1 paragraph) that:
@@ -40,24 +67,16 @@ Your lab report should include:
    	* At a high level, explain what simulations you ran and why. *How did they help you evaluate the efficacy of your design? Include well-annotated simulation waveforms to support your argument.*
 	  
 4. A brief **post-lab discussion** (1-2 pages) that addresses the following questions:
-   	* Describe your methodology. What steps did you take, and how did you leverage the incremental build and test process?
-   	* What challenges did you encounter? How did you address these challenges?
-   	* How well did the system as a whole work? Did you observe any unexpected behavior or timing discrepancies upon implementing your design in hardware? How did you resolve them?
-   	* Reflect on your testbench designs for each block and top-level entity. Did the simulation results reveal any unexpected issues? How would you improve your design/test/debug process in the future?
-   	* How, if at all, did this lab shape your perspective on the FPGA design process? In what ways did this change your thoughts on hierarchical design?
-
+   	* Describe your methodology. *What steps did you take, and how did you leverage the incremental build and test process?*
+   	* *What challenges did you encounter? How did you address these challenges?*
+   	* *How well did the system as a whole work? Did you observe any unexpected behavior or timing discrepancies upon implementing your design in hardware? How did you resolve them?*
+   	* Reflect on your testbench designs for each block and top-level entity. *Did the simulation results reveal any unexpected issues? How would you improve your design/test/debug process in the future?*
+   	* *How, if at all, did this lab shape your perspective on the FPGA design process? In what ways did this change your thoughts on hierarchical design?*
 ---
 
 ### Design Documentation Summary
 
-The paper designs, RTL schematics, block diagrams, and annotated waveform diagrams listed at the end of each task in `README_Assignment.md` should all be included as figures in the report. 
-
->[!Important]
->Every image/figure in the report should have a short (1-2 sentences) description of what the reader should deduce from looking at it.
->All block diagrams and simulation waveforms should be sufficiently annotated to make it easy to see the intended design and behavior.
->**You will not receive credit for uncommented figures.**
-
-** A summary of the design deliverables is consolidated below:**
+A summary of the design deliverables from `README_Assignment.md` is consolidated below:
 
 #### Task 1: I2S Transmitter
 * Paper design for your I2S timing block (include calculated specifications)
@@ -88,12 +107,3 @@ The paper designs, RTL schematics, block diagrams, and annotated waveform diagra
 * Print out of your Vivado synthesis and implementation `Messages` panel (deselect `Info`, and select `Warnings`, `Critical Warnings`, and `Errors`). If any warnings remain, explain why they are benign.
 
 
----
-
-### Evaluation
-Your work will be evaluated against a rubric with the following breakdown:
-* 30% of your grade for the quality of your paper design (architecture, parameter, and timing analysis).
-* 30% of your grade for the quality of your testbench simulation (code and annotated results).
-* 15% of your grade for the quality of your code.
-* 10% of your grade for the quality of your implementation results and design demonstration.
-* 15% of your grade for the quality of your post-lab documentation and analysis (your explanatory work).
