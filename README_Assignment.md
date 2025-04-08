@@ -156,8 +156,8 @@ In this task, you will design a DDS module that can produce a 24-bit sine wave--
 ---
 
 ### Design Steps
-* On paper, design a DDS component that can output two octaves (C4 through C6). 
-	* Given a 48 kHz sampling rate, what is the required phase resolution? 
+* On paper, design a DDS component that can output two octaves (C4 through C6) ***within 1%*** of the specified musical note frequencies
+	* Given a 48 kHz sampling rate, what is the required phase resolution to generate tones with < 1% error? 
 	* How many samples do you need stored in memory? What size BRAM is required?
 	* How many bits are the data and phase increment signals?
 * Draw the RTL schematic for your DDS component, including the phase accumulator design, BRAM, and control logic.
