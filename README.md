@@ -13,7 +13,7 @@
 2. Complete the **design tasks** in the assignment -- `README_Assignment.md`
 	* Use the starter code provided in the `hw/` folder
 	* When you get to Task 3, use the C code provided in the `sdk/` folder -- you will not need to modify the code for this assignment 
-3. Give a live **demonstration** of your system during class on **Thursday, 4/17 (1:20-2:10 PM)**
-4. Submit your code and **post-lab report** to Canvas by **11:59 PM on Thursday, 4/17**
+3. Give a live **demonstration** of your system during class on **Monday, 4/13 (3:30 - 5:20 PM)**
+4. Submit your code and **post-lab report** to Canvas by **3:30 PM on Monday, 4/13**
 	* Instructions on the assignment submission components can be found in the `README_Postlab.md` file.
-	* Submit one report per lab group
+	* Each student will submit their own report and code repository.
