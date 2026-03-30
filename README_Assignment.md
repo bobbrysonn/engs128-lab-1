@@ -28,7 +28,7 @@ To test the I2S transmitter design, you will implement a Direct Digital Synthesi
 
 #### Prelab Questions
 
-Work with your partner to answer the prelab questions in `README_Prelab.md`. The prelab is dedicated to navigating through the technical documentation to find the specifications of the system you will be designing.
+You may work with a partner to answer the prelab questions in `README_Prelab.md`. The prelab is dedicated to navigating through the technical documentation to find the specifications of the system you will be designing.
 
 #### Retrieve the Starter Code
 
@@ -57,7 +57,7 @@ Before getting started on the design tasks, retrieve the starter code for the as
 
 #### Postlab Report
 
-The post-lab report instructions and evaluation details are outlined in `README_Postlab.md`--note that the majority of the post-lab report will consist of consolidating, organizing, and explaining the design documentation deliverables in each task, so it would be wise to document as you go. You and your partner are expected to work together on this--each lab group will submit one report.
+The post-lab report instructions and evaluation details are outlined in `README_Postlab.md`--note that the majority of the post-lab report will consist of consolidating, organizing, and explaining the design documentation deliverables in each task, so it would be wise to document as you go. You may collaborate with a partner on the design, but each student will submit their own report and code repository. 
 
 ---
 
@@ -296,5 +296,5 @@ You will demonstrate your design functionality on the assignment due date.
 ## Postlab 
 
 Follow the instructions in `README_Postlab.md`. For the Canvas assignment submission, you will upload:
-1. A link to your group's GitHub repo containing all of your code (source and simulation)
+1. A link to your GitHub repo containing all of your code (source and simulation)
 2. A PDF of your post-lab report.
