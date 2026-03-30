@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------
 --  Lab 1: DDS and the Audio Codec
 ----------------------------------------------------------------------------
---  ENGS 128 Spring 2025
+--  ENGS 128
 --	Author: Kendall Farnham
 ----------------------------------------------------------------------------
 --	Description: Testbench for the I2S transmitter
@@ -46,7 +46,6 @@ component i2s_transmitter is
     Port (
 
         -- Timing
-		mclk_i    : in std_logic;	
 		bclk_i    : in std_logic;	
 		lrclk_i   : in std_logic;
 		
@@ -97,7 +96,6 @@ port map(
 -- I2S transmitter
 dut_audio_transmitter: i2s_transmitter
 port map(
-    mclk_i              => mclk,
     bclk_i              => bclk,
     lrclk_i             => lrclk,
     left_audio_data_i   => left_audio_data_tx,		-- Drive these inputs

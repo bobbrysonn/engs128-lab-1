@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------
 --  Lab 1: DDS and the Audio Codec
 ----------------------------------------------------------------------------
---  ENGS 128 Spring 2025
+--  ENGS 128
 --	Author: Kendall Farnham
 ----------------------------------------------------------------------------
 --	Description: I2S receiver for SSM2603 audio codec
@@ -17,7 +17,6 @@ entity i2s_receiver is
     Port (
 
         -- Timing
-		mclk_i    : in std_logic;	
 		bclk_i    : in std_logic;	
 		lrclk_i   : in std_logic;
 		
