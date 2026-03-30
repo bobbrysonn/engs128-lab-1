@@ -47,7 +47,7 @@ After you've answered all of the prelab questions, show your results to the Prof
 ---
 
 ### Zybo Z7-20 Reference Manual Audio Codec Scavenger Hunt
-The board reference manual is typically a good place to start when bringing up new devices. [Open the Zybo reference manual to the section on audio](https://digilent.com/reference/programmable-logic/zybo-z7/reference-manual#audio) and read through the section. Work with your partner to answer the following questions:
+The board reference manual is typically a good place to start when bringing up new devices. [Open the Zybo reference manual to the section on audio](https://digilent.com/reference/programmable-logic/zybo-z7/reference-manual#audio) and read through the section. You may work alone or with a partner to answer the following questions:
 
 1. Is the audio codec integrated into our Zynq SoC? How do you know?
 2. What is the Manufacturer Part Number (MPN) of the audio codec? 
