@@ -8,7 +8,7 @@ For the Canvas assignment submission, you will upload:
 * Your GitHub repository link
 * A PDF of your post-lab report
 
-You and your partner are expected to work together on this assignment--each lab group will submit one GitHub link and post-lab report.
+You may collaborate with a partner on pieces of the system design and implementation strategies, but each student will submit their own Github link and post-lab report.
 
 ---
 
@@ -57,7 +57,7 @@ The majority of the post-lab report will consist of consolidating, organizing, a
 ### Report Outline
 Your lab report should include:
 1. A brief **introduction** (1 paragraph) that:
-	* Explains how the design works at a high-level
+	* Explains how the design works at a high level
 	* Provides an overview of the documentation included in the report
 2. Answers to the **pre-lab** questions in `README_Prelab.md`.
 3. Separate sections for each of the **design tasks** in `README_Assignment.md` that provide detailed descriptions and documentation (the list of design documents to submit for each task is consolidated in the section below). 
@@ -89,7 +89,6 @@ A summary of the design deliverables from `README_Assignment.md` is consolidated
 * Screenshot of your Vivado elaborated design (`dds_controller.vhd` schematic)
 * Annotated simulation screenshots that clearly show the functionality of your DDS controller.
 
-
 #### Task 3: DDS -> I2S Transmitter
 * Paper design for your DDS -> I2S transmitter top design (RTL schematic)
 * Screenshot of your Vivado elaborated design (`top_level.vhd` schematic)
@@ -97,7 +96,6 @@ A summary of the design deliverables from `README_Assignment.md` is consolidated
 * Annotated simulation screenshots that clearly show the correct timing of your I2S signals
 	* Include a close-up of the I2S transmitter signals. Show that the left and right serial data streams are correct, given the input DDS signal.
  	* Include a high-level screenshot that shows the left and right audio frequencies changing. 
-
 
 #### Task 4: I2S Receiver
 * Paper design for your I2S receiver/DDS -> I2S transmitter top design (RTL schematic)
