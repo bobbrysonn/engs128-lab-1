@@ -73,7 +73,9 @@ component sine_lut is
     Port (
         clka  : in  std_logic;
         ena   : in  std_logic;
+        wea   : in  std_logic_vector(0 downto 0);
         addra : in  std_logic_vector(PHASE_DATA_WIDTH-1 downto 0);
+        dina  : in  std_logic_vector(DDS_DATA_WIDTH-1 downto 0);
         douta : out std_logic_vector(DDS_DATA_WIDTH-1 downto 0));
 end component;
 
@@ -106,7 +108,9 @@ bram_sine_lut : sine_lut
     port map (
         clka  => clk_i,
         ena   => '1',
+        wea   => (others => '0'),
         addra => std_logic_vector(phase_acc),
+        dina  => (others => '0'),
         douta => data_o);
 
 ----------------------------------------------------------------------------
