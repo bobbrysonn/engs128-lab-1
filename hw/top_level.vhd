@@ -195,19 +195,14 @@ i2s_tx : i2s_transmitter
 -- -------------------------------------------------------------------------
 -- I2S receiver (Task 4)
 -- -------------------------------------------------------------------------
--- Uncomment and implement i2s_receiver.vhd for Task 4 passthrough test
--- i2s_rx : i2s_receiver
---     generic map (AC_DATA_WIDTH => AC_DATA_WIDTH)
---     port map (
---         bclk_i             => bclk_s,
---         lrclk_i            => lrclk_s,
---         adc_serial_data_i  => ac_adc_data_i,
---         left_audio_data_o  => left_rx_data_s,
---         right_audio_data_o => right_rx_data_s);
-
--- Tie receiver outputs to zero until Task 4
-left_rx_data_s  <= (others => '0');
-right_rx_data_s <= (others => '0');
+i2s_rx : i2s_receiver
+    generic map (AC_DATA_WIDTH => AC_DATA_WIDTH)
+    port map (
+        bclk_i             => bclk_s,
+        lrclk_i            => lrclk_s,
+        adc_serial_data_i  => ac_adc_data_i,
+        left_audio_data_o  => left_rx_data_s,
+        right_audio_data_o => right_rx_data_s);
 
 ----------------------------------------------------------------------------
 -- Audio source mux
