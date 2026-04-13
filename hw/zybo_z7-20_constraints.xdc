@@ -30,22 +30,22 @@
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Clock signal
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
-#set_property -dict { PACKAGE_PIN K17   IOSTANDARD LVCMOS33 			} [get_ports { sysclk_i 		 		}]; #IO_L12P_T1_MRCC_35 		Sch=sysclk
-#create_clock -add -name sys_clk_pin -period 8.00 -waveform {0 4} 	  [get_ports { sysclk_i 		 		}];
+set_property -dict { PACKAGE_PIN K17   IOSTANDARD LVCMOS33 			} [get_ports { sysclk_i 		 		}]; #IO_L12P_T1_MRCC_35 		Sch=sysclk
+create_clock -add -name sys_clk_pin -period 8.00 -waveform {0 4} 	  [get_ports { sysclk_i 		 		}];
 
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Switches
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
-set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i_0[0]		}]; #IO_L19N_T3_VREF_35 		Sch=sw[0]
-set_property -dict { PACKAGE_PIN P15   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i_0[1]		}]; #IO_L24P_T3_34 				Sch=sw[1]
-set_property -dict { PACKAGE_PIN W13   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i_0[2]		}]; #IO_L4N_T0_34 				Sch=sw[2]
-set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 			} [get_ports { dds_enable_i_0			}]; #IO_L9P_T1_DQS_34 			Sch=sw[3]
+set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i[0]		}]; #IO_L19N_T3_VREF_35 		Sch=sw[0]
+set_property -dict { PACKAGE_PIN P15   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i[1]		}]; #IO_L24P_T3_34 				Sch=sw[1]
+set_property -dict { PACKAGE_PIN W13   IOSTANDARD LVCMOS33 			} [get_ports { dds_freq_sel_i[2]		}]; #IO_L4N_T0_34 				Sch=sw[2]
+set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 			} [get_ports { dds_enable_i				}]; #IO_L9P_T1_DQS_34 			Sch=sw[3]
 
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Buttons
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
-set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 			} [get_ports { dds_reset_i_0 		 		}]; #IO_L12N_T1_MRCC_35 		Sch=btn[0]
-set_property -dict { PACKAGE_PIN P16   IOSTANDARD LVCMOS33 			} [get_ports { ac_mute_en_i_0 		 		}]; #IO_L24N_T3_34 				Sch=btn[1]
+set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 			} [get_ports { dds_reset_i 		 		}]; #IO_L12N_T1_MRCC_35 		Sch=btn[0]
+set_property -dict { PACKAGE_PIN P16   IOSTANDARD LVCMOS33 			} [get_ports { ac_mute_en_i 		 		}]; #IO_L24N_T3_34 				Sch=btn[1]
 #set_property -dict { PACKAGE_PIN K19   IOSTANDARD LVCMOS33 			} [get_ports { buttons_i[2] 		 		}]; #IO_L10P_T1_AD11P_35 		Sch=btn[2]
 #set_property -dict { PACKAGE_PIN Y16   IOSTANDARD LVCMOS33 			} [get_ports { buttons_i[3] 		 		}]; #IO_L7P_T1_34 				Sch=btn[3]
 
@@ -137,13 +137,13 @@ set_property -dict { PACKAGE_PIN P16   IOSTANDARD LVCMOS33 			} [get_ports { ac_
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Audio Codec
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
-set_property -dict { PACKAGE_PIN R19   IOSTANDARD LVCMOS33 } [get_ports { ac_bclk_o_0 }]; #IO_0_34 Sch=ac_bclk
-set_property -dict { PACKAGE_PIN R17   IOSTANDARD LVCMOS33 } [get_ports { ac_mclk_o_0 }]; #IO_L19N_T3_VREF_34 Sch=ac_mclk
-set_property -dict { PACKAGE_PIN P18   IOSTANDARD LVCMOS33 } [get_ports { ac_mute_n_o_0 }]; #IO_L23N_T3_34 Sch=ac_muten
-set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { ac_dac_data_o_0 }]; #IO_L20N_T3_34 Sch=ac_pbdat
-set_property -dict { PACKAGE_PIN T19   IOSTANDARD LVCMOS33 } [get_ports { ac_dac_lrclk_o_0 }]; #IO_25_34 Sch=ac_pblrc
-set_property -dict { PACKAGE_PIN R16   IOSTANDARD LVCMOS33 } [get_ports { ac_adc_data_i_0 }]; #IO_L19P_T3_34 Sch=ac_recdat
-set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS33 } [get_ports { ac_adc_lrclk_o_0 }]; #IO_L17P_T2_34 Sch=ac_reclrc
+set_property -dict { PACKAGE_PIN R19   IOSTANDARD LVCMOS33 } [get_ports { ac_bclk_o }]; #IO_0_34 Sch=ac_bclk
+set_property -dict { PACKAGE_PIN R17   IOSTANDARD LVCMOS33 } [get_ports { ac_mclk_o }]; #IO_L19N_T3_VREF_34 Sch=ac_mclk
+set_property -dict { PACKAGE_PIN P18   IOSTANDARD LVCMOS33 } [get_ports { ac_mute_n_o }]; #IO_L23N_T3_34 Sch=ac_muten
+set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { ac_dac_data_o }]; #IO_L20N_T3_34 Sch=ac_pbdat
+set_property -dict { PACKAGE_PIN T19   IOSTANDARD LVCMOS33 } [get_ports { ac_dac_lrclk_o }]; #IO_25_34 Sch=ac_pblrc
+set_property -dict { PACKAGE_PIN R16   IOSTANDARD LVCMOS33 } [get_ports { ac_adc_data_i }]; #IO_L19P_T3_34 Sch=ac_recdat
+set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS33 } [get_ports { ac_adc_lrclk_o }]; #IO_L17P_T2_34 Sch=ac_reclrc
 set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS33 } [get_ports { IIC_0_scl_io }]; #IO_L13P_T2_MRCC_34 Sch=ac_scl
 set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS33 } [get_ports { IIC_0_sda_io }]; #IO_L23P_T3_34 Sch=ac_sda
 ## -----------------------------------------------------------------------------------------------------------------------------------------------------------
