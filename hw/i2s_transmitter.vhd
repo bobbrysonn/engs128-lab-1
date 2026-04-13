@@ -57,7 +57,8 @@ signal state : state_type := IDLE;
 ----------------------------------------------------------------------------
 -- Datapath signals
 ----------------------------------------------------------------------------
--- Shift register holds: '0' (X delay) & data (24b) & zeros (7b) = 32 bits
+-- Shift register holds the bits sent after the I2S delay slot:
+-- data (24b) & zeros (7b) & trailing fill bit = 32 bits total storage
 signal shift_reg  : std_logic_vector(FRAME_BITS-1 downto 0) := (others => '0');
 signal bit_count  : integer range 0 to FRAME_BITS-1 := 0;
 
@@ -77,9 +78,6 @@ transmit : process(bclk_i)
 begin
     if falling_edge(bclk_i) then
 
-        -- Always register LRCLK for edge detection on next cycle
-        lrclk_prev <= lrclk_i;
-
         case state is
 
             ------------------------------------------------------------
@@ -88,18 +86,26 @@ begin
             when IDLE =>
                 dac_serial_data_o <= '0';
 
-                -- LRCLK rising edge → right channel frame starts
+                -- Register LRCLK only in IDLE so edges that occur during
+                -- SHIFT are not consumed before we return here to check them.
+                lrclk_prev <= lrclk_i;
+
+                -- LRCLK rising edge → right channel frame starts.
+                -- This falling BCLK is the mandatory I2S one-bit delay, so
+                -- preload the remaining 31 bits to send on subsequent BCLKs.
                 if lrclk_i = '1' and lrclk_prev = '0' then
-                    shift_reg <= '0' & right_audio_data_i &
-                                 std_logic_vector(to_unsigned(0, PADDING_BITS));
-                    bit_count <= 0;
+                    shift_reg <= right_audio_data_i &
+                                 std_logic_vector(to_unsigned(0, PADDING_BITS)) &
+                                 '0';
+                    bit_count <= 1;
                     state     <= SHIFT;
 
-                -- LRCLK falling edge → left channel frame starts
+                -- LRCLK falling edge → left channel frame starts.
                 elsif lrclk_i = '0' and lrclk_prev = '1' then
-                    shift_reg <= '0' & left_audio_data_i &
-                                 std_logic_vector(to_unsigned(0, PADDING_BITS));
-                    bit_count <= 0;
+                    shift_reg <= left_audio_data_i &
+                                 std_logic_vector(to_unsigned(0, PADDING_BITS)) &
+                                 '0';
+                    bit_count <= 1;
                     state     <= SHIFT;
                 end if;
 
