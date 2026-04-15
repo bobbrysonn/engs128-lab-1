@@ -4,12 +4,10 @@
 ----------------------------------------------------------------------------
 --  I2S clock generation for SSM2603 audio codec
 --
---  MCLK  = 12.288 MHz  (clk_wiz_0 clk_out1, from 125 MHz sysclk)
---  BCLK  =  3.072 MHz  (MCLK / 4)
---  LRCLK = 48.000 kHz  (BCLK / 64)
---
---  Vivado: create Clocking Wizard IP named clk_wiz_0
---    clk_in1  = 125 MHz, clk_out1 = 12.288 MHz (single output)
+--  Receives MCLK (12.288 MHz) from the Clocking Wizard in the block design.
+--  Divides down to:
+--    BCLK  = 3.072 MHz  (MCLK / 4)
+--    LRCLK = 48.000 kHz (BCLK / 64)
 ----------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -20,7 +18,7 @@ use UNISIM.VComponents.all;
 
 entity i2s_clock_gen is
     Port (
-        sysclk_125MHz_i  : in  std_logic;
+        mclk_i           : in  std_logic;
         mclk_fwd_o       : out std_logic;
         bclk_fwd_o       : out std_logic;
         adc_lrclk_fwd_o  : out std_logic;
@@ -32,44 +30,21 @@ end i2s_clock_gen;
 
 architecture Behavioral of i2s_clock_gen is
 
--- MCLK -> BCLK: toggle every 2 MCLK cycles (divide-by-4)
-constant BCLK_HALF_TC   : integer := 2;
--- BCLK -> LRCLK: toggle every 32 BCLK cycles (divide-by-64)
-constant LRCLK_HALF_TC  : integer := 32;
+constant BCLK_HALF_TC  : integer := 2;
+constant LRCLK_HALF_TC : integer := 32;
 
-signal mclk     : std_logic := '0';
-signal bclk_raw : std_logic := '0';
-signal bclk     : std_logic := '0';
-signal lrclk    : std_logic := '0';
-signal locked   : std_logic := '0';
-
+signal bclk_raw      : std_logic := '0';
+signal bclk          : std_logic := '0';
+signal lrclk         : std_logic := '0';
 signal bclk_counter  : unsigned(0 downto 0) := (others => '0');
 signal lrclk_counter : unsigned(4 downto 0) := (others => '0');
 
-component clk_wiz_0 is
-    port (
-        clk_out1 : out std_logic;
-        reset    : in  std_logic;
-        locked   : out std_logic;
-        clk_in1  : in  std_logic);
-end component;
-
 begin
-
-audio_clk_wiz : clk_wiz_0
-    port map (
-        clk_out1 => mclk,
-        reset    => '0',
-        locked   => locked,
-        clk_in1  => sysclk_125MHz_i);
 
 -- MCLK -> BCLK divide-by-4
-bclk_divider : process(mclk, locked)
+bclk_divider : process(mclk_i)
 begin
-    if locked = '0' then
-        bclk_counter <= (others => '0');
-        bclk_raw     <= '0';
-    elsif rising_edge(mclk) then
+    if rising_edge(mclk_i) then
         if bclk_counter = BCLK_HALF_TC - 1 then
             bclk_counter <= (others => '0');
             bclk_raw     <= not bclk_raw;
@@ -83,12 +58,9 @@ bclk_bufg : BUFG
     port map (I => bclk_raw, O => bclk);
 
 -- BCLK -> LRCLK divide-by-64
-lrclk_divider : process(bclk, locked)
+lrclk_divider : process(bclk)
 begin
-    if locked = '0' then
-        lrclk_counter <= (others => '0');
-        lrclk         <= '0';
-    elsif rising_edge(bclk) then
+    if rising_edge(bclk) then
         if lrclk_counter = LRCLK_HALF_TC - 1 then
             lrclk_counter <= (others => '0');
             lrclk         <= not lrclk;
@@ -98,13 +70,13 @@ begin
     end if;
 end process lrclk_divider;
 
-mclk_o  <= mclk;
+mclk_o  <= mclk_i;
 bclk_o  <= bclk;
 lrclk_o <= lrclk;
 
 oddr_mclk : ODDR
     generic map (DDR_CLK_EDGE => "SAME_EDGE", INIT => '0', SRTYPE => "SYNC")
-    port map (Q => mclk_fwd_o, C => mclk, CE => '1', D1 => '1', D2 => '0', R => '0', S => '0');
+    port map (Q => mclk_fwd_o, C => mclk_i, CE => '1', D1 => '1', D2 => '0', R => '0', S => '0');
 
 oddr_bclk : ODDR
     generic map (DDR_CLK_EDGE => "SAME_EDGE", INIT => '0', SRTYPE => "SYNC")

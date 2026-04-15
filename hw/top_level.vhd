@@ -25,7 +25,7 @@ use UNISIM.VComponents.all;
 ----------------------------------------------------------------------------
 entity top_level is
     Port (
-        sysclk_i       : in  std_logic;
+        mclk_i         : in  std_logic;
 
         -- User controls
         dds_reset_i    : in  std_logic;
@@ -89,7 +89,7 @@ signal right_rx_data_s : std_logic_vector(AC_DATA_WIDTH-1 downto 0);
 -- Clock generation
 component i2s_clock_gen is
     Port (
-        sysclk_125MHz_i : in  std_logic;
+        mclk_i          : in  std_logic;
         mclk_fwd_o      : out std_logic;
         bclk_fwd_o      : out std_logic;
         adc_lrclk_fwd_o : out std_logic;
@@ -143,7 +143,7 @@ begin
 ----------------------------------------------------------------------------
 clk_gen : i2s_clock_gen
     port map (
-        sysclk_125MHz_i => sysclk_i,
+        mclk_i          => mclk_i,
         mclk_fwd_o      => ac_mclk_o,
         bclk_fwd_o      => ac_bclk_o,
         adc_lrclk_fwd_o => ac_adc_lrclk_o,
