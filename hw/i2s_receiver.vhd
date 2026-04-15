@@ -91,16 +91,20 @@ begin
 
             ------------------------------------------------------------
             -- SHIFT:
-            --   bit 0      = I2S delay slot (ignored)
-            --   bits 1-24  = captured sample
-            --   bits 25-31 = padding / don't care (ignored)
+            --   bits 0-23  = captured sample (MSB first)
+            --   bits 24-31 = padding / don't care (ignored)
+            --
+            --  The LRCLK edge is detected at R0 (rising BCLK halfway through
+            --  the I2S delay slot).  By R1 (bit_count=0) the delay slot is
+            --  over and the codec has already driven the MSB, so capture
+            --  begins immediately at bit_count=0.
             ------------------------------------------------------------
             when SHIFT =>
-                if bit_count >= 1 and bit_count <= AC_DATA_WIDTH then
+                if bit_count <= AC_DATA_WIDTH - 1 then
                     next_word := shift_reg(AC_DATA_WIDTH-2 downto 0) & adc_serial_data_i;
                     shift_reg <= next_word;
 
-                    if bit_count = AC_DATA_WIDTH then
+                    if bit_count = AC_DATA_WIDTH - 1 then
                         if lrclk_i = '0' then
                             left_audio_data_s <= next_word;
                         else
