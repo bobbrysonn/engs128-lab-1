@@ -65,6 +65,7 @@ signal state : state_type := IDLE1;
 ----------------------------------------------------------------------------
 signal shift_reg          : std_logic_vector(AC_DATA_WIDTH-1 downto 0) := (others => '0');
 signal bit_count          : integer range 0 to AC_DATA_WIDTH-1 := 0;
+signal lrclk_prev         : std_logic := '0';
 signal left_audio_data_s  : std_logic_vector(AC_DATA_WIDTH-1 downto 0) := (others => '0');
 signal right_audio_data_s : std_logic_vector(AC_DATA_WIDTH-1 downto 0) := (others => '0');
 
@@ -77,24 +78,27 @@ right_audio_data_o <= right_audio_data_s;
 ----------------------------------------------------------------------------
 -- I2S receive process
 -- All activity on BCLK rising edges.
--- LRCLK level is checked directly (no separate edge-detect register) because
--- the 6-state FSM naturally arrives at each IDLE state with LRCLK in the
--- opposite polarity from the transition it is waiting for.
+-- lrclk_prev is updated every cycle so edge detection is reliable even at
+-- startup (clock_divider initialises LRCLK to '1', so a pure level check
+-- in IDLE1 would fire immediately and capture mid-frame garbage).
 ----------------------------------------------------------------------------
 receive : process(bclk_i)
     variable next_word : std_logic_vector(AC_DATA_WIDTH-1 downto 0);
 begin
     if rising_edge(bclk_i) then
+        -- Register LRCLK every cycle for edge detection in IDLE states.
+        lrclk_prev <= lrclk_i;
+
         case state is
 
             ----------------------------------------------------------------
-            -- IDLE1: LRCLK is low (left frame running or just finished).
-            -- Wait for LRCLK to go high (right-channel frame begins).
-            -- This rising edge IS the I2S delay slot for the right channel;
-            -- the codec will drive the right MSB on the next falling BCLK.
+            -- IDLE1: wait for LRCLK rising edge (right-channel frame begins).
+            -- The rising edge itself IS the I2S delay slot; the codec drives
+            -- the right MSB on the following BCLK falling edge, so LOADR
+            -- (which runs on the next rising BCLK) captures the correct bit.
             ----------------------------------------------------------------
             when IDLE1 =>
-                if lrclk_i = '1' then
+                if lrclk_i = '1' and lrclk_prev = '0' then
                     state <= LOADR;
                 end if;
 
@@ -127,12 +131,13 @@ begin
                 end if;
 
             ----------------------------------------------------------------
-            -- IDLE2: LRCLK is high (right frame still running, padding bits).
-            -- Wait for LRCLK to go low (left-channel frame begins).
-            -- This falling edge IS the I2S delay slot for the left channel.
+            -- IDLE2: wait for LRCLK falling edge (left-channel frame begins).
+            -- Padding bits from the right frame keep us here until the edge.
+            -- The falling edge IS the left-channel delay slot; LOADL runs
+            -- on the next rising BCLK and captures the left MSB correctly.
             ----------------------------------------------------------------
             when IDLE2 =>
-                if lrclk_i = '0' then
+                if lrclk_i = '0' and lrclk_prev = '1' then
                     state <= LOADL;
                 end if;
 
